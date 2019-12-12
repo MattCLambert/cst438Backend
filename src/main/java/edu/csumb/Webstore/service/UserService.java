@@ -44,6 +44,28 @@ public class UserService
     {
         return userRepository.findAll();
     }
+    public List<User> getUsers(String username)
+    {
+        List<User> users = userRepository.findAll();
+        List<User> ret = new ArrayList<User>();
+        for(int i=0;i< users.size();i++)
+        {
+            if(users.get(i).getName().equals(username))
+            {
+                ret.add(users.get(i));
+            }
+        }
+        return ret;
+    }
+    public User getUser(String id)
+    {
+        if(userRepository.findById(id)!= null)
+        {
+            User u = userRepository.findById(id).get();
+            return u;
+        }
+        return null;
+    }
     public String authenticate(String username,String password)
     {
         List<User> users = userRepository.findAll();
@@ -80,8 +102,7 @@ public class UserService
     {
         if(userRepository.findById(id)!= null)
         {
-            Optional<User> op = userRepository.findById(id);
-            User u = op.get();
+            User u = userRepository.findById(id).get();
             HashMap<String, Inventory> map = u.getInventoryMap();
             Inventory adder = inventoryService.add(i);
             map.put(adder.getID(),adder);
@@ -100,6 +121,42 @@ public class UserService
             map.remove(employeeId);
             userRepository.save(u);
         }
+    }
+    public void changeName(String id, String name)
+    {
+        if(userRepository.findById(id)!= null)
+        {
+            User u = userRepository.findById(id).get();
+            u.setName(name);
+            userRepository.save(u);
+        }
+    }
+    public String getName(String id)
+    {
+        if(userRepository.findById(id)!= null)
+        {
+            User u = userRepository.findById(id).get();
+            return u.getName();
+        }
+        return null;
+    }
+    public HashMap<String,Employee> getEmployees(String id)
+    {
+        if(userRepository.findById(id)!= null)
+        {
+            User u = userRepository.findById(id).get();
+            return u.getemployeeMap();
+        }
+        return null;
+    }
+    public HashMap<String,Inventory> getInventory(String id)
+    {
+        if(userRepository.findById(id)!= null)
+        {
+            User u = userRepository.findById(id).get();
+            return u.getInventoryMap();
+        }
+        return null;
     }
     public void removeInventory(String id, String inventoryId)
     {

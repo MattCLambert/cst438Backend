@@ -7,6 +7,7 @@ package edu.csumb.Webstore.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.HashMap; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,7 +42,7 @@ public class UserController
         return userService.add(p);
     }
     
-    @RequestMapping(method = RequestMethod.POST, value = "/users/addEmployee")
+    @RequestMapping(method = RequestMethod.POST, value = "/users/addEmployee/{id}")
     @ApiOperation(value = "Adds an employee to a user." )
     public Employee addEmployee(@RequestParam String id, @RequestBody Employee e)
     {
@@ -55,28 +56,28 @@ public class UserController
         
         return userService.addInventory(id,i);
     }
-    @RequestMapping(method = RequestMethod.POST, value = "/users/remove")
+    @RequestMapping(method = RequestMethod.POST, value = "/users/remove/{id}")
     @ApiOperation(value = "Removes a user from the database." )
-    public void remove(@RequestParam String p)
+    public void remove(@RequestParam String id)
     {
         
-        userService.remove(p);
+        userService.remove(id);
     }
-    @RequestMapping(method = RequestMethod.POST, value = "/users/removeEmployee")
+    @RequestMapping(method = RequestMethod.POST, value = "/users/removeEmployee/{userID}{employeeID}")
     @ApiOperation(value = "Removes a employee from the user." )
-    public void removeEmployee(@RequestParam String p,@RequestParam String p2)
+    public void removeEmployee(@RequestParam String userID,@RequestParam String employeeID)
     {
         
-        userService.removeEmployee(p,p2);
+        userService.removeEmployee(userID,employeeID);
     }
-    @RequestMapping(method = RequestMethod.POST, value = "/users/removeInventory")
+    @RequestMapping(method = RequestMethod.POST, value = "/users/removeInventory/{userID}{inventoryID}")
     @ApiOperation(value = "Removes an inventory object from the user." )
-    public void removeInventory(@RequestParam String p,@RequestParam String p2)
+    public void removeInventory(@RequestParam String userID,@RequestParam String inventoryID)
     {
         
-        userService.removeInventory(p,p2);
+        userService.removeInventory(userID,inventoryID);
     }
-    @RequestMapping(method = RequestMethod.POST, value = "/users/authenticate")
+    @RequestMapping(method = RequestMethod.POST, value = "/users/authenticate/{username}{password}")
     @ApiOperation(value = "Authenticates a user." )
     public String authenticate(@RequestParam String username,@RequestParam String password)
     {
@@ -90,6 +91,41 @@ public class UserController
         
         return userService.getAll();
     }
-
-    
+    @RequestMapping(method = RequestMethod.GET, value = "/users/getUsers/{name}")
+    @ApiOperation(value = "Gets all the users in a with the given name." )
+    public List<User> getUsers(@RequestParam String name)
+    {
+        
+        return userService.getUsers(name);
+    }
+    @RequestMapping(method = RequestMethod.GET, value = "/users/getUser/{id}")
+    @ApiOperation(value = "Gets one user with given ID." )
+    public User getUser(@RequestParam String id)
+    {
+        return userService.getUser(id);
+    }
+    @RequestMapping(method = RequestMethod.GET, value = "/users/getName/{ID}")
+    @ApiOperation(value = "Gets the name of a user a with given ID." )
+    public String getName(@RequestParam String ID)
+    {
+        return userService.getName(ID);
+    }
+    @RequestMapping(method = RequestMethod.POST, value = "/users/changeName/{id}{name}")
+    @ApiOperation(value = "Changes the name of a User." )
+    public void changeName(@RequestParam String id,@RequestParam String name)
+    {
+        userService.changeName(id,name);
+    }
+    @RequestMapping(method = RequestMethod.GET, value = "/users/getEmployees/{id}")
+    @ApiOperation(value = "Gets all the employees from a user." )
+    public HashMap<String,Employee> getEmployees(@RequestParam String id)
+    {
+        return userService.getEmployees(id);
+    }
+    @RequestMapping(method = RequestMethod.GET, value = "/users/getInventory/{ID}")
+    @ApiOperation(value = "Gets all the inventory from a user." )
+    public HashMap<String,Inventory> getInventory(@RequestParam String ID)
+    {
+        return userService.getInventory(ID);
+    }
 }

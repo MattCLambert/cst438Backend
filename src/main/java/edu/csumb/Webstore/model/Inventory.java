@@ -20,7 +20,6 @@ public class Inventory
     public Inventory()
     {
         name = "";
-        id = "";
         description = "";
         imageURL = "";
         price = 0.0;
