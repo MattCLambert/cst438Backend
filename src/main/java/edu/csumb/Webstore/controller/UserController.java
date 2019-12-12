@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import edu.csumb.Webstore.model.User;
 import edu.csumb.Webstore.model.Inventory;
@@ -34,6 +35,7 @@ public class UserController
 
     //APIOPERATION
     //This is comments that will be displayed in swagger. Remember to do this or you will lose points!
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/users/add")
     @ApiOperation(value = "Adds a user to the database." )
     public User add(@RequestBody User p)
@@ -41,7 +43,7 @@ public class UserController
         
         return userService.add(p);
     }
-    
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/users/addEmployee/{id}")
     @ApiOperation(value = "Adds an employee to a user." )
     public Employee addEmployee(@RequestParam String id, @RequestBody Employee e)
@@ -49,6 +51,7 @@ public class UserController
         
         return userService.addEmployee(id,e);
     }
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/users/addInventory")
     @ApiOperation(value = "Adds a Inventory object to a user." )
     public Inventory addInventory(@RequestParam String id, @RequestBody Inventory i)
@@ -56,6 +59,7 @@ public class UserController
         
         return userService.addInventory(id,i);
     }
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/users/remove/{id}")
     @ApiOperation(value = "Removes a user from the database." )
     public void remove(@RequestParam String id)
@@ -63,6 +67,7 @@ public class UserController
         
         userService.remove(id);
     }
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/users/removeEmployee/{userID}{employeeID}")
     @ApiOperation(value = "Removes a employee from the user." )
     public void removeEmployee(@RequestParam String userID,@RequestParam String employeeID)
@@ -70,6 +75,7 @@ public class UserController
         
         userService.removeEmployee(userID,employeeID);
     }
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/users/removeInventory/{userID}{inventoryID}")
     @ApiOperation(value = "Removes an inventory object from the user." )
     public void removeInventory(@RequestParam String userID,@RequestParam String inventoryID)
@@ -77,6 +83,7 @@ public class UserController
         
         userService.removeInventory(userID,inventoryID);
     }
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/users/authenticate/{username}{password}")
     @ApiOperation(value = "Authenticates a user." )
     public String authenticate(@RequestParam String username,@RequestParam String password)
@@ -84,6 +91,7 @@ public class UserController
         
         return userService.authenticate(username,password);
     }
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/users/getAll")
     @ApiOperation(value = "Gets all the users in a database." )
     public List<User> getAll()
@@ -91,6 +99,7 @@ public class UserController
         
         return userService.getAll();
     }
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/users/getUsers/{name}")
     @ApiOperation(value = "Gets all the users in a with the given name." )
     public List<User> getUsers(@RequestParam String name)
@@ -98,30 +107,35 @@ public class UserController
         
         return userService.getUsers(name);
     }
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/users/getUser/{id}")
     @ApiOperation(value = "Gets one user with given ID." )
     public User getUser(@RequestParam String id)
     {
         return userService.getUser(id);
     }
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/users/getName/{ID}")
     @ApiOperation(value = "Gets the name of a user a with given ID." )
     public String getName(@RequestParam String ID)
     {
         return userService.getName(ID);
     }
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/users/changeName/{id}{name}")
     @ApiOperation(value = "Changes the name of a User." )
     public void changeName(@RequestParam String id,@RequestParam String name)
     {
         userService.changeName(id,name);
     }
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/users/getEmployees/{id}")
     @ApiOperation(value = "Gets all the employees from a user." )
     public HashMap<String,Employee> getEmployees(@RequestParam String id)
     {
         return userService.getEmployees(id);
     }
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/users/getInventory/{ID}")
     @ApiOperation(value = "Gets all the inventory from a user." )
     public HashMap<String,Inventory> getInventory(@RequestParam String ID)
