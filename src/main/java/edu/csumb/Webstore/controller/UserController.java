@@ -130,7 +130,7 @@ public class UserController
     }
     @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/users/getPass/{ID}")
-    @ApiOperation(value = "Gets the name of a password a with given ID." )
+    @ApiOperation(value = "Gets the password of a user a with given ID." )
     public String getPass(@RequestParam String ID)
     {
         return userService.getPass(ID);
@@ -141,6 +141,20 @@ public class UserController
     public void changePass(@RequestParam String id,@RequestParam String pass)
     {
         userService.changePass(id,pass);
+    }
+    @CrossOrigin(origins = "*")
+    @RequestMapping(method = RequestMethod.GET, value = "/users/getEmail/{ID}")
+    @ApiOperation(value = "Gets the Email a with given ID." )
+    public String getEmail(@RequestParam String ID)
+    {
+        return userService.getPass(ID);
+    }
+    @CrossOrigin(origins = "*")
+    @RequestMapping(method = RequestMethod.POST, value = "/users/changeEmail/{id}{email}")
+    @ApiOperation(value = "Changes the Email of a User." )
+    public void changeEmail(@RequestParam String id,@RequestParam String email)
+    {
+        userService.changeEmail(id,email);
     }
     @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/users/getEmployees/{id}")

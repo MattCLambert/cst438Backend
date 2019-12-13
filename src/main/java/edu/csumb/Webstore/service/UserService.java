@@ -158,6 +158,24 @@ public class UserService
         }
         return null;
     }
+    public void changeEmail(String id, String email)
+    {
+        if(userRepository.findById(id)!= null)
+        {
+            User u = userRepository.findById(id).get();
+            u.setEmail(email);
+            userRepository.save(u);
+        }
+    }
+    public String getEmail(String id)
+    {
+        if(userRepository.findById(id)!= null)
+        {
+            User u = userRepository.findById(id).get();
+            return u.getEmail();
+        }
+        return null;
+    }
     public HashMap<String,Employee> getEmployees(String id)
     {
         if(userRepository.findById(id)!= null)

@@ -14,6 +14,7 @@ public class User
 {
     private String name;
     private String password;
+    private String email;
     @ApiModelProperty(hidden = true, required = false)
     @Id
     private String id;
@@ -26,12 +27,14 @@ public class User
     {
         name = "";
         password = "";
+        email = "";
         employeeMap = new HashMap<String, Employee>();
         inventoryMap = new HashMap<String, Inventory>();
     }
-    public User(String name,String password)
+    public User(String name,String password,String email)
     {
         this.name = name;
+        this.email = email;
         this.password = password;
         employeeMap = new HashMap<>();
         
@@ -45,6 +48,9 @@ public class User
     }
     public String getName(){
         return name;
+    }
+    public String getEmail(){
+        return email;
     }
     public String getPassword(){
         return password;
@@ -60,6 +66,9 @@ public class User
     }
     public void setName(String name){
         this.name = name;
+    }
+    public void setEmail(String email){
+        this.email = email;
     }
     public void setPassword(String password){
         this.password = password;
