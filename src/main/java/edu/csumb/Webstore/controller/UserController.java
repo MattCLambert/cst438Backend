@@ -129,6 +129,20 @@ public class UserController
         userService.changeName(id,name);
     }
     @CrossOrigin(origins = "*")
+    @RequestMapping(method = RequestMethod.GET, value = "/users/getPass/{ID}")
+    @ApiOperation(value = "Gets the name of a password a with given ID." )
+    public String getPass(@RequestParam String ID)
+    {
+        return userService.getPass(ID);
+    }
+    @CrossOrigin(origins = "*")
+    @RequestMapping(method = RequestMethod.POST, value = "/users/changePassword/{id}{pass}")
+    @ApiOperation(value = "Changes the password of a User." )
+    public void changePass(@RequestParam String id,@RequestParam String pass)
+    {
+        userService.changePass(id,pass);
+    }
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/users/getEmployees/{id}")
     @ApiOperation(value = "Gets all the employees from a user." )
     public HashMap<String,Employee> getEmployees(@RequestParam String id)

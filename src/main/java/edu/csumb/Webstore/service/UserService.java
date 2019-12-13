@@ -140,6 +140,24 @@ public class UserService
         }
         return null;
     }
+    public void changePass(String id, String pass)
+    {
+        if(userRepository.findById(id)!= null)
+        {
+            User u = userRepository.findById(id).get();
+            u.setPassword(pass);
+            userRepository.save(u);
+        }
+    }
+    public String getPass(String id)
+    {
+        if(userRepository.findById(id)!= null)
+        {
+            User u = userRepository.findById(id).get();
+            return u.getPassword();
+        }
+        return null;
+    }
     public HashMap<String,Employee> getEmployees(String id)
     {
         if(userRepository.findById(id)!= null)
