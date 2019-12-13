@@ -147,7 +147,7 @@ public class UserController
     @ApiOperation(value = "Gets the Email a with given ID." )
     public String getEmail(@RequestParam String ID)
     {
-        return userService.getPass(ID);
+        return userService.getEmail(ID);
     }
     @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/users/changeEmail/{id}{email}")
