@@ -164,10 +164,24 @@ public class UserController
         return userService.getEmployees(id);
     }
     @CrossOrigin(origins = "*")
+    @RequestMapping(method = RequestMethod.GET, value = "/users/getEmployeesWithName/{id}{name}")
+    @ApiOperation(value = "Gets all the employees from a user with the provided name." )
+    public List<Employee> getEmployeesWithName(@RequestParam String id,@RequestParam String name)
+    {
+        return userService.getEmployeesWithName(id,name);
+    }
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/users/getInventory/{ID}")
     @ApiOperation(value = "Gets all the inventory from a user." )
     public HashMap<String,Inventory> getInventory(@RequestParam String ID)
     {
         return userService.getInventory(ID);
+    }
+    @CrossOrigin(origins = "*")
+    @RequestMapping(method = RequestMethod.GET, value = "/users/getInventoryWithName/{id}{name}")
+    @ApiOperation(value = "Gets all the employees from a user with the provided name." )
+    public List<Inventory> getInventoryWithName(@RequestParam String id,@RequestParam String name)
+    {
+        return userService.getInventoryWithName(id,name);
     }
 }

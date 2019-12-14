@@ -185,6 +185,38 @@ public class UserService
         }
         return null;
     }
+    public List<Employee> getEmployeesWithName(String id,String name)
+    {
+        List<Employee> ret = new ArrayList<Employee>();
+        if(userRepository.findById(id)!= null)
+        {
+            HashMap<String,Employee> temp = getEmployees(id);
+            for (Employee emp : temp.values())
+            {
+                if(emp.getName().equals(name))
+                {
+                    ret.add(emp);
+                }
+            }
+        }
+        return ret;
+    }
+    public List<Inventory> getInventoryWithName(String id,String name)
+    {
+        List<Inventory> ret = new ArrayList<Inventory>();
+        if(userRepository.findById(id)!= null)
+        {
+            HashMap<String,Inventory> temp = getInventory(id);
+            for (Inventory inv : temp.values())
+            {
+                if(inv.getName().equals(name))
+                {
+                    ret.add(inv);
+                }
+            }
+        }
+        return ret;
+    }
     public HashMap<String,Inventory> getInventory(String id)
     {
         if(userRepository.findById(id)!= null)
