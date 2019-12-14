@@ -136,11 +136,32 @@ public class UserController
         return userService.getPass(ID);
     }
     @CrossOrigin(origins = "*")
+    @RequestMapping(method = RequestMethod.GET, value = "/users/getAdmin/{ID}")
+    @ApiOperation(value = "Gets the admin status of a user a with given ID." )
+    public Boolean getAdmin(@RequestParam String ID)
+    {
+        return userService.getAdmin(ID);
+    }
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/users/changePassword/{id}{pass}")
     @ApiOperation(value = "Changes the password of a User." )
     public void changePass(@RequestParam String id,@RequestParam String pass)
     {
         userService.changePass(id,pass);
+    }
+    @CrossOrigin(origins = "*")
+    @RequestMapping(method = RequestMethod.POST, value = "/users/addAdmin/{id}")
+    @ApiOperation(value = "Makes User an Admin." )
+    public void addAdmin(@RequestParam String id)
+    {
+        userService.addAdmin(id);
+    }
+    @CrossOrigin(origins = "*")
+    @RequestMapping(method = RequestMethod.POST, value = "/users/removeAdmin/{id}")
+    @ApiOperation(value = "Revokes User's Admin priviledges." )
+    public void removeAdmin(@RequestParam String id)
+    {
+        userService.removeAdmin(id);
     }
     @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/users/getEmail/{ID}")

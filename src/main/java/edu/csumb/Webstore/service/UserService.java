@@ -66,6 +66,15 @@ public class UserService
         }
         return null;
     }
+    public Boolean getAdmin(String id)
+    {
+        if(userRepository.findById(id)!= null)
+        {
+            User u = userRepository.findById(id).get();
+            return u.getAdmin();
+        }
+        return null;
+    }
     public String authenticate(String username,String password)
     {
         List<User> users = userRepository.findAll();
@@ -84,7 +93,28 @@ public class UserService
         }
         return "Username does not exist.";
     }
-    
+    public String authenticateAdmin(String username,String password)
+    {
+        List<User> users = userRepository.findAll();
+        for(int i=0;i< users.size();i++)
+        {
+            if(users.get(i).getName().equals(username))
+            {
+                if(users.get(i).getPassword().equals(password))
+                {
+                    if(users.get(i).getAdmin())
+                    {
+                        return "Logged in.";
+                    }
+                    return "Not an Admin.";
+                }
+                else{
+                    return "Invalid Username or password.";
+                }
+            }
+        }
+        return "Username does not exist.";
+    }
     public Employee addEmployee(String id, Employee e)
     {
         if(userRepository.findById(id)!= null)
@@ -128,6 +158,24 @@ public class UserService
         {
             User u = userRepository.findById(id).get();
             u.setName(name);
+            userRepository.save(u);
+        }
+    }
+    public void addAdmin(String id)
+    {
+        if(userRepository.findById(id)!= null)
+        {
+            User u = userRepository.findById(id).get();
+            u.setAdmin(true);
+            userRepository.save(u);
+        }
+    }
+    public void removeAdmin(String id)
+    {
+        if(userRepository.findById(id)!= null)
+        {
+            User u = userRepository.findById(id).get();
+            u.setAdmin(false);
             userRepository.save(u);
         }
     }

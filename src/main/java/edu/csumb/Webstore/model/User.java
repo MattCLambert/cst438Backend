@@ -22,7 +22,8 @@ public class User
     private  HashMap<String, Employee> employeeMap;
     @ApiModelProperty(required = false)
     private  HashMap<String, Inventory> inventoryMap;
-
+    @ApiModelProperty(hidden = true, required = false)
+    private boolean isAdmin;
     public User()
     {
         name = "";
@@ -30,13 +31,16 @@ public class User
         email = "";
         employeeMap = new HashMap<String, Employee>();
         inventoryMap = new HashMap<String, Inventory>();
+        isAdmin = false;
     }
     public User(String name,String password,String email)
     {
         this.name = name;
         this.email = email;
         this.password = password;
-        employeeMap = new HashMap<>();
+        employeeMap = new HashMap<String, Employee>();
+        inventoryMap = new HashMap<String, Inventory>();
+        isAdmin = false;
         
     }
     public String authenticate(String password){
@@ -58,6 +62,9 @@ public class User
     public String getID(){
         return id;
     }
+    public Boolean getAdmin(){
+        return isAdmin;
+    }
     public HashMap<String, Employee> getemployeeMap(){
         return employeeMap;
     }
@@ -66,6 +73,9 @@ public class User
     }
     public void setName(String name){
         this.name = name;
+    }
+    public void setAdmin(Boolean admin){
+        this.isAdmin = admin;
     }
     public void setEmail(String email){
         this.email = email;
