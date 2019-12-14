@@ -38,6 +38,16 @@ public class UserService
     }
     public void remove(String ID)
     {
+        HashMap<String,Employee> temp = getEmployees(ID);
+        for(Employee emp : temp.values())
+        {
+            employeeService.remove(emp.getID());
+        }
+        HashMap<String,Inventory> temp2 = getInventory(ID);
+        for(Inventory inv : temp2.values())
+        {
+            inventoryService.remove(inv.getID());
+        }
         userRepository.deleteById(ID);
     }
     public List<User> getAll()
