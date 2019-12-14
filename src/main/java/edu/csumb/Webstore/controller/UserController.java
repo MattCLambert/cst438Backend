@@ -92,6 +92,14 @@ public class UserController
         return userService.authenticate(username,password);
     }
     @CrossOrigin(origins = "*")
+    @RequestMapping(method = RequestMethod.POST, value = "/users/authenticateAdmin/{username}{password}")
+    @ApiOperation(value = "Authenticates an Admin." )
+    public String authenticateAdmin(@RequestParam String username,@RequestParam String password)
+    {
+        
+        return userService.authenticateAdmin(username,password);
+    }
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/users/getAll")
     @ApiOperation(value = "Gets all the users in a database." )
     public List<User> getAll()
