@@ -179,7 +179,7 @@ public class UserController
     }
     @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET, value = "/users/getInventoryWithName/{id}{name}")
-    @ApiOperation(value = "Gets all the employees from a user with the provided name." )
+    @ApiOperation(value = "Gets all the Inventory from a user with the provided name." )
     public List<Inventory> getInventoryWithName(@RequestParam String id,@RequestParam String name)
     {
         return userService.getInventoryWithName(id,name);
