@@ -32,14 +32,14 @@ public class InventoryController
     //APIOPERATION
     //This is comments that will be displayed in swagger. Remember to do this or you will lose points!
     @CrossOrigin(origins = "*")
-    @RequestMapping(method = RequestMethod.POST, value = "/inventory/changePrice")
+    @RequestMapping(method = RequestMethod.POST, value = "/inventory/changePrice/{id}{price}")
     @ApiOperation(value = "Changes the price of Inventory object by ID" )
     public void changePrice(@RequestParam String ID,@RequestParam Double Price)
     {
         inventoryService.changePrice(ID,Price);
     }
     @CrossOrigin(origins = "*")
-    @RequestMapping(method = RequestMethod.POST, value = "/inventory/changeStock")
+    @RequestMapping(method = RequestMethod.POST, value = "/inventory/changeStock/{id}{stock}")
     @ApiOperation(value = "Changes the Stock of Inventory object by ID" )
     public void changeStock(@RequestParam String ID,@RequestParam Integer Stock)
     {
@@ -53,28 +53,28 @@ public class InventoryController
         return inventoryService.add(p);
     }
     @CrossOrigin(origins = "*")
-    @RequestMapping(method = RequestMethod.POST, value = "/inventory/remove")
+    @RequestMapping(method = RequestMethod.POST, value = "/inventory/remove/{id}")
     @ApiOperation(value = "Removes a inventory object from the database." )
-    public void remove(@RequestParam String p)
+    public void remove(@RequestParam String id)
     {
-        inventoryService.remove(p);
+        inventoryService.remove(id);
     }
     @CrossOrigin(origins = "*")
-    @RequestMapping(method = RequestMethod.POST, value = "/inventory/changeName")
+    @RequestMapping(method = RequestMethod.POST, value = "/inventory/changeName/{id}{name}")
     @ApiOperation(value = "Changes the name of Inventory object by ID" )
     public void changeName(@RequestParam String ID,@RequestParam String Name)
     {
         inventoryService.changeName(ID,Name);
     }
     @CrossOrigin(origins = "*")
-    @RequestMapping(method = RequestMethod.POST, value = "/inventory/changeDescription")
+    @RequestMapping(method = RequestMethod.POST, value = "/inventory/changeDescription/{id}{description}")
     @ApiOperation(value = "Changes the description of Inventory object by ID" )
     public void changeDescription(@RequestParam String ID,@RequestParam String description)
     {
         inventoryService.changeDescription(ID,description);
     }
     @CrossOrigin(origins = "*")
-    @RequestMapping(method = RequestMethod.POST, value = "/inventory/changeImage")
+    @RequestMapping(method = RequestMethod.POST, value = "/inventory/changeImage/{id}{imageURL}")
     @ApiOperation(value = "Changes the Image of Inventory object by ID" )
     public void changeImage(@RequestParam String ID,@RequestParam String imageURL)
     {

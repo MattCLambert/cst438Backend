@@ -34,22 +34,22 @@ public class EmployeeController
         return employeeService.add(p);
     }
     @CrossOrigin(origins = "*")
-    @RequestMapping(method = RequestMethod.POST, value = "/employee/remove")
+    @RequestMapping(method = RequestMethod.POST, value = "/employee/remove/{id}")
     @ApiOperation(value = "Removes an Employee from the database." )
-    public void remove(@RequestParam String p)
+    public void remove(@RequestParam String id)
     {
-        employeeService.remove(p);
+        employeeService.remove(id);
     }
     @CrossOrigin(origins = "*")
-    @RequestMapping(method = RequestMethod.POST, value = "/employee/changeName")
+    @RequestMapping(method = RequestMethod.POST, value = "/employee/changeName/{id}{name}")
     @ApiOperation(value = "Changes the name of an Employee by ID" )
     public void changeName(@RequestParam String ID,@RequestParam String Name)
     {
         employeeService.changeName(ID,Name);
     }
     @CrossOrigin(origins = "*")
-    @RequestMapping(method = RequestMethod.POST, value = "/inventory/changeSalary")
-    @ApiOperation(value = "Changes the Salary of Inventory object by ID" )
+    @RequestMapping(method = RequestMethod.POST, value = "/employee/changeSalary/{id}{salary}")
+    @ApiOperation(value = "Changes the Salary of employee object by ID" )
     public void changeSalary(@RequestParam String ID,@RequestParam Double Salary)
     {
         employeeService.changeSalary(ID,Salary);
