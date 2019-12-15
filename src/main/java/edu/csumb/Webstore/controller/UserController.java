@@ -86,7 +86,7 @@ public class UserController
     @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST, value = "/users/authenticate/{username}{password}")
     @ApiOperation(value = "Authenticates a user." )
-    public String authenticate(@RequestParam String username,@RequestParam String password)
+    public User authenticate(@RequestParam String username,@RequestParam String password)
     {
         
         return userService.authenticate(username,password);

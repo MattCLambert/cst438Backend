@@ -85,7 +85,7 @@ public class UserService
         }
         return null;
     }
-    public String authenticate(String username,String password)
+    public User authenticate(String username,String password)
     {
         List<User> users = userRepository.findAll();
         for(int i=0;i< users.size();i++)
@@ -94,14 +94,12 @@ public class UserService
             {
                 if(users.get(i).getPassword().equals(password))
                 {
-                    return "Logged in.";
+                    return users.get(i);
                 }
-                else{
-                    return "Invalid Username or password.";
-                }
+                
             }
         }
-        return "Username does not exist.";
+        return null;
     }
     public String authenticateAdmin(String username,String password)
     {
